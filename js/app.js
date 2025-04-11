@@ -156,13 +156,13 @@ birthdayBtn.onclick = function () {
   }
 
   birthdayBtn.innerHTML = `
-   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-     <path d="M9 18V5l12-2v13"></path>
-     <circle cx="6" cy="18" r="3"></circle>
-     <circle cx="18" cy="16" r="3"></circle>
-   </svg>
-   ${word}
- `;
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+       <path d="M9 18V5l12-2v13"></path>
+       <circle cx="6" cy="18" r="3"></circle>
+       <circle cx="18" cy="16" r="3"></circle>
+     </svg>
+     ${word}
+   `;
 
   playNote(hz, dur, 0.2);
 
@@ -209,66 +209,6 @@ function changeWish() {
 setInterval(changeWish, 4000);
 changeWish();
 
-// Check if today is birthday and switch display
-function checkBirthday() {
-  const now = new Date();
-
-  // Set target date to April 14th of current year
-  const targetDate = new Date(now.getFullYear(), 3, 14); // Month is 0-indexed, so 3 = April
-
-  // If today's date is past April 14th, set target to next year
-  if (now > targetDate) {
-    targetDate.setFullYear(now.getFullYear() + 1);
-  }
-
-  const beforeBirthday = document.getElementById("beforeBirthday");
-  const birthdayContent = document.getElementById("birthdayContent");
-
-  // If today is the birthday
-  if (now.getDate() === 14 && now.getMonth() === 3) {
-    beforeBirthday.style.display = "none";
-    birthdayContent.style.display = "flex";
-    createParticles();
-    createConfetti();
-    return;
-  } else {
-    beforeBirthday.style.display = "flex";
-    birthdayContent.style.display = "none";
-  }
-}
-
-// Create countdown to actual birthday
-function updateCountdown() {
-  const now = new Date();
-
-  // Set target date to April 14th of current year
-  const targetDate = new Date(now.getFullYear(), 3, 14); // Month is 0-indexed, so 3 = April
-
-  // If today's date is past April 14th, set target to next year
-  if (now > targetDate) {
-    targetDate.setFullYear(now.getFullYear() + 1);
-  }
-
-  const diff = targetDate - now;
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  document.getElementById("days").innerText = days.toString().padStart(2, "0");
-  document.getElementById("hours").innerText = hours
-    .toString()
-    .padStart(2, "0");
-  document.getElementById("minutes").innerText = minutes
-    .toString()
-    .padStart(2, "0");
-  document.getElementById("seconds").innerText = seconds
-    .toString()
-    .padStart(2, "0");
-}
-
 // Initialize everything
-checkBirthday();
-setInterval(updateCountdown, 1000);
-updateCountdown();
+createParticles();
+createConfetti();
